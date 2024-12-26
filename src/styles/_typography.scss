@@ -1,0 +1,34 @@
+@use "./variables" as *;
+@use "./mixins" as *;
+
+.heading-l {
+  @include typography($font-size-heading-l, $font-weight-bold);
+}
+
+.heading-m {
+  @include typography($font-size-heading-m, $font-weight-bold);
+}
+
+.heading-s {
+  @include typography($font-size-heading-s, $font-weight-bold);
+}
+
+.body {
+  @include typography($font-size-body, $font-weight-bold);
+}
+
+.body-2 {
+  @include typography($font-size-body-2, $font-weight-medium);
+}
+
+.subtext {
+  @include typography($font-size-subtext, $font-weight-bold);
+}
+
+.subtext-2 {
+  @include typography($font-size-subtext-2, $font-weight-regular);
+}
+
+.button {
+  @include typography($font-size-button, $font-weight-bold);
+}
