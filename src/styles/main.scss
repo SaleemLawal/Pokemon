@@ -7,3 +7,10 @@
 @use "./mixins" as *;
 @use "./utilities" as *;
 @use "./variables" as *;
+
+@use "../app.module.scss" as *;
+@use "../components/header/header.module.scss" as *;
+@use "../components/pokemonCard/pokemonCard.module.scss" as *;
+@use "../components/searchBar/SearchBar.module.scss" as *;
+
+@use "../pages/homepage/homepage.module.scss" as *;

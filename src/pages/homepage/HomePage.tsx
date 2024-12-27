@@ -10,10 +10,30 @@ import { sortPokemon } from "../../utils/helpers";
 
 export default function HomePage() {
   const [sortOrder, setSortOrder] = useState("asc-num");
+  const [searchTerm, setSearchTerm] = useState<string>("");
   const [pokemonDataSet, setPokemonDataSet] = useState<PokemonProps[]>([]);
+  const [filteredData, setFilteredData] = useState<PokemonProps[]>([]);
 
   const handleSortChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
     setSortOrder(e.target.value);
+  };
+
+  const handleSearch = () => {
+    if (searchTerm === "") {
+      setFilteredData(pokemonDataSet);
+      return;
+    }
+    
+    const filtered = pokemonDataSet.filter((pokemon) => {
+      const isNameMatch = pokemon.name
+        .toLowerCase()
+        .includes(searchTerm.toLowerCase());
+
+      const isIdMatch =
+        Number(searchTerm) > 0 && pokemon.url.includes(`/${searchTerm}/`);
+      return isNameMatch || isIdMatch;
+    });
+    setFilteredData(filtered);
   };
 
   useEffect(() => {
@@ -22,6 +42,7 @@ export default function HomePage() {
         const pokemonList = await fetchPokemon();
         const sortedPokemonList = sortPokemon(pokemonList, sortOrder);
         setPokemonDataSet(sortedPokemonList);
+        setFilteredData(pokemonList);
       } catch (err) {
         console.error("Error fetching data:", err);
       }
@@ -31,7 +52,11 @@ export default function HomePage() {
 
   return (
     <div className={styles.homepage}>
-      <Header />
+      <Header
+        searchTerm={searchTerm}
+        setSearchTerm={setSearchTerm}
+        handleSearch={handleSearch}
+      />
       <main>
         <div className={styles.homepage__sort_container}>
           <div className={styles.homepage__sort}>
@@ -49,13 +74,14 @@ export default function HomePage() {
         </div>
 
         <div className={styles.pokemons}>
-          {pokemonDataSet ? (
-            pokemonDataSet.map((pokemon: PokemonProps) => {
+          {filteredData ? (
+            filteredData.map((pokemon: PokemonProps) => {
               return (
                 <PokemonCard
                   name={pokemon.name}
                   url={pokemon.url}
                   key={pokemon.name}
+                  searchTerm={searchTerm}
                 />
               );
             })

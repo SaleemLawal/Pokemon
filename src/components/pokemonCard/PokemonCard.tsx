@@ -4,11 +4,11 @@ import axios from "axios";
 import styles from "./pokemonCard.module.scss";
 import "../../styles/_typography.scss";
 
-export default function PokemonCard({ url }: PokemonProps) {
+export default function PokemonCard({ url, searchTerm }: PokemonProps) {
   const [pokemonDetail, setPokemonDetail] = useState<PokemonDetail | null>(
     null
   );
-  
+
   useEffect(() => {
     const loadPokemonData = async () => {
       try {
@@ -33,6 +33,19 @@ export default function PokemonCard({ url }: PokemonProps) {
 
   if (!pokemonDetail) {
     return <div>Loading...</div>;
+  }
+
+  const matchesSearch =
+    searchTerm === "" ||
+    searchTerm == null ||
+    pokemonDetail.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
+    pokemonDetail.types.some((pokemon) =>
+      pokemon.type.name.toLowerCase().includes(searchTerm.toLowerCase())
+    ) ||
+    pokemonDetail.id === Number(searchTerm);
+
+  if (!matchesSearch) {
+    return null;
   }
 
   return (

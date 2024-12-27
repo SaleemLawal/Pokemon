@@ -1,6 +1,7 @@
 type PokemonProps = {
     name: string;
     url: string;
+    searchTerm?: string;
 };
 
 type PokemonDetail = {
@@ -22,4 +23,9 @@ type PokemonData = {
     results: PokemonResult[];
 }
 
-export type {PokemonProps, PokemonDetail, PokemonData}
+type SearchBarProps = {
+    searchTerm: string;
+    setSearchTerm: React.Dispatch<React.SetStateAction<string>>;
+    handleSearch: () => void;
+};
+export type {PokemonProps, PokemonDetail, PokemonData, SearchBarProps}

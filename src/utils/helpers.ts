@@ -15,10 +15,5 @@ const sortPokemon = (pokemonList: { name: string; url: string }[], order: string
       }
     });
   };
-
-
-  const search = () => {
-    
-  }
   
-export {sortPokemon, search}
+export {sortPokemon}
