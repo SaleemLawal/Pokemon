@@ -8,6 +8,10 @@ export default function SearchBar() {
     setSearchTerm(e?.target.value);
   };
 
+  const handleSubmit = () => {
+    console.log(searchTerm)
+  }
+
   return (
     <div className="search">
       <div className={styles.search__input_container}>
@@ -19,7 +23,7 @@ export default function SearchBar() {
           value={searchTerm}
           onChange={handleInputChange}
         />
-        <button className={`${styles["search__search--btn"]} btn btn--yellow `}>
+        <button className={`${styles["search__search--btn"]} btn btn--yellow `} onClick={handleSubmit}>
           Search
         </button>
       </div>

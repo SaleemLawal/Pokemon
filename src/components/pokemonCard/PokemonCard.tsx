@@ -8,6 +8,7 @@ export default function PokemonCard({ url }: PokemonProps) {
   const [pokemonDetail, setPokemonDetail] = useState<PokemonDetail | null>(
     null
   );
+  
   useEffect(() => {
     const loadPokemonData = async () => {
       try {
