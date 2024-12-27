@@ -36,7 +36,6 @@
     gap: 0.5rem;
     border-radius: 100px;
     border: 2px solid $color-grey-dark-16;
-    padding: 0.75rem 1.5rem;
     transition: transform 0.3s;
   }
 
@@ -62,4 +61,12 @@
   100% {
     transform: scale(1);
   }
+}
+
+.pokemons {
+  margin-top: 10rem;
+  display: flex;
+  flex-wrap: wrap;
+  row-gap: 7em;
+  column-gap: 4%;
 }

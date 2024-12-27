@@ -3,12 +3,207 @@
 .btn {
   cursor: pointer;
   border: none;
-  padding: 0.75rem 3rem;
+  padding: 0.75rem;
   border-radius: 0.7rem;
   background-color: $color-white;
 }
 
 .btn--yellow {
+  padding: 0.75rem 3rem;
   color: $color-dark-blue;
   background-color: $color-yellow;
+}
+
+.grass {
+  background-color: $color-grass-tag;
+}
+
+.fire {
+  background-color: $color-fire-tag;
+}
+
+.bug {
+  background-color: $color-bug-tag;
+}
+
+.water {
+  background-color: $color-water-tag;
+}
+
+.flying {
+  background-color: $color-flying-tag;
+}
+
+.poison {
+  background-color: $color-poison-tag;
+}
+
+.normal {
+  background-color: $color-normal-tag;
+}
+
+.rock {
+  background-color: $color-rock-tag;
+}
+
+.ground {
+  background-color: $color-ground-tag;
+}
+
+.fighting {
+  background-color: $color-fighting-tag;
+}
+
+.ghost {
+  background-color: $color-ghost-tag;
+}
+
+.psychic {
+  background-color: $color-psychic-tag;
+}
+
+.dragon {
+  background-color: $color-dragon-tag;
+}
+
+.fairy {
+  background-color: $color-fairy-tag;
+}
+
+.electric {
+  background-color: $color-electric-tag;
+}
+
+.steel {
+  background-color: $color-steel-tag;
+}
+
+.grass {
+  background-color: $color-grass-tag;
+}
+
+.fire {
+  background-color: $color-fire-tag;
+}
+
+.bug {
+  background-color: $color-bug-tag;
+}
+
+.water {
+  background-color: $color-water-tag;
+}
+
+.flying {
+  background-color: $color-flying-tag;
+}
+
+.poison {
+  background-color: $color-poison-tag;
+}
+
+.normal {
+  background-color: $color-normal-tag;
+}
+
+.rock {
+  background-color: $color-rock-tag;
+}
+
+.ground {
+  background-color: $color-ground-tag;
+}
+
+.fighting {
+  background-color: $color-fighting-tag;
+}
+
+.ghost {
+  background-color: $color-ghost-tag;
+}
+
+.psychic {
+  background-color: $color-psychic-tag;
+}
+
+.dragon {
+  background-color: $color-dragon-tag;
+}
+
+.fairy {
+  background-color: $color-fairy-tag;
+}
+
+.electric {
+  background-color: $color-electric-tag;
+}
+
+.steel {
+  background-color: $color-steel-tag;
+}
+
+// background
+
+.grass--background {
+  background-color: $color-grass-background;
+}
+
+.fire--background {
+  background-color: $color-fire-background;
+}
+
+.bug--background {
+  background-color: $color-bug-background;
+}
+
+.water--background {
+  background-color: $color-water-background;
+}
+
+.flying--background {
+  background-color: $color-flying-background;
+}
+
+.poison--background {
+  background-color: $color-poison-background;
+}
+
+.normal--background {
+  background-color: $color-normal-background;
+}
+
+.rock--background {
+  background-color: $color-rock-background;
+}
+
+.ground--background {
+  background-color: $color-ground-background;
+}
+
+.fighting--background {
+  background-color: $color-fighting-background;
+}
+
+.ghost--background {
+  background-color: $color-ghost-background;
+}
+
+.psychic--background {
+  background-color: $color-psychic-background;
+}
+
+.dragon--background {
+  background-color: $color-dragon-background;
+}
+
+.fairy--background {
+  background-color: $color-fairy-background;
+}
+
+.electric--background {
+  background-color: $color-electric-background;
+}
+
+.steel--background {
+  background-color: $color-steel-background;
 }

@@ -1,16 +1,31 @@
 import Header from "../../components/header/Header";
+import PokemonCard from "../../components/pokemonCard/PokemonCard";
+
 import styles from "./homepage.module.scss";
 import filterLogo from "../../assets/images/octicon_filter-16.svg";
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
+import { getData } from "../../services/pokemonService";
+import { PokemonProps } from "../../utils/types";
 
-export default function homepage() {
+export default function HomePage() {
   const [sortOrder, setSortOrder] = useState("Lowest Number First");
+  const [data, setData] = useState<PokemonProps[]>([]);
 
   const handleSortChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
     setSortOrder(e.target.value);
-    console.log(e.target.value);
   };
 
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const fetchedData = await getData();
+        setData(fetchedData);
+      } catch (err) {
+        console.error("Error fetching data:", err);
+      }
+    };
+    fetchData();
+  }, []);
   return (
     <div className={styles.homepage}>
       <Header />
@@ -28,6 +43,22 @@ export default function homepage() {
             <img src={filterLogo} alt="Filter Logo" />
             Filters
           </button>
+        </div>
+
+        <div className={styles.pokemons}>
+          {data ? (
+            data.map((pokemon: PokemonProps) => {
+              return (
+                <PokemonCard
+                  name={pokemon.name}
+                  url={pokemon.url}
+                  key={pokemon.name}
+                />
+              );
+            })
+          ) : (
+            <p>Loading...</p>
+          )}
         </div>
       </main>
     </div>

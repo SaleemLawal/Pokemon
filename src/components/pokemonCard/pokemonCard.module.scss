@@ -1,0 +1,44 @@
+@use "../../styles//variables" as *;
+.pokemon {
+  max-width: 25%;
+  width: 22%;
+  height: 18rem;
+  padding: 1.5rem;
+  border-radius: 1rem;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+
+  &__img {
+    width: 12.5rem;
+    height: 12.5rem;
+    position: absolute;
+    top: 0;
+    left: 50%;
+    transform: translate(-50%, -50%);
+  }
+
+  &__header {
+    color: $color-white;
+    text-transform: capitalize;
+    margin-bottom: 0.5rem;
+  }
+
+  &__id {
+    color: rgba($color-grey-light, 0.7);
+    margin-bottom: 1rem;
+  }
+
+  &__list {
+    list-style: none;
+    display: flex;
+    gap: 0.5rem;
+  }
+
+  &__item {
+    padding: 0.25rem 1rem;
+    border-radius: 100px;
+    
+  }
+}

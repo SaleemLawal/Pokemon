@@ -1,0 +1,51 @@
+@use "../../styles/variables" as *;
+
+.search {
+  &__input_container {
+    position: relative;
+  }
+  &__input {
+    width: 100%;
+    padding: 1.25rem;
+    padding-left: 4rem;
+    border-radius: 0.7rem;
+    color: inherit;
+    position: relative;
+    border: 1px solid transparent;
+    box-shadow: 0 1rem 4rem $color-grey-dark-8;
+    transition: all 0.3s;
+
+    &:focus {
+      &::placeholder {
+        color: $color-blue;
+      }
+    }
+    &::placeholder {
+      color: inherit;
+    }
+
+    &:focus {
+      outline: none;
+      border: 1px solid $color-dark-blue-60;
+      box-shadow: 0 1rem 4rem $color-grey-dark-16;
+    }
+  }
+
+  &__icon_container {
+    width: 32px;
+    height: 32px;
+    mask: url("../../assets/images/search.svg") no-repeat center;
+    -webkit-mask: url("../../assets/images/search.svg") no-repeat center;
+    background-color: $color-dark-blue;
+    position: absolute;
+    top: 0.5rem;
+    left: 0.5rem;
+    z-index: 1;
+  }
+
+  &__search--btn {
+    position: absolute;
+    top: 0.5rem;
+    right: 0.5rem;
+  }
+}
