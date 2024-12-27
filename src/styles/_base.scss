@@ -1,3 +1,4 @@
+@use "./variables" as *;
 *,
 *::before,
 *::after {
@@ -6,8 +7,12 @@
   box-sizing: border-box;
 }
 
-body {
-  background-color: red;
+html {
+  font-size: 62.5%;
+  font-family: "Roboto", serif;
 }
 
-
+img {
+  max-width: 100%;
+  display: block;
+}

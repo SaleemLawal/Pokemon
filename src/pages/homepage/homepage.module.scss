@@ -1,0 +1,65 @@
+@use "../../styles/variables" as *;
+
+.homepage {
+  font-weight: 700;
+
+  &__sort_container {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+
+  &__sort select {
+    font-family: inherit;
+    font-weight: inherit;
+    appearance: none;
+    border: 2px solid $color-grey-dark-16;
+    border-radius: 8px;
+    padding: 8px 12px;
+    cursor: pointer;
+    width: 20rem;
+    background-image: url("../../assets/images/ep_arrow-down.svg");
+    background-repeat: no-repeat;
+    background-position: right 1rem center;
+    background-size: 1.6rem;
+  }
+
+  &__sort select:focus {
+    outline: none;
+  }
+
+  &__filter {
+    font-family: inherit;
+    font-weight: inherit;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    border-radius: 100px;
+    border: 2px solid $color-grey-dark-16;
+    padding: 0.75rem 1.5rem;
+    transition: transform 0.3s;
+  }
+
+  &__filter:active {
+    animation: pulsate 0.5s ease-in-out infinite;
+  }
+
+  &__filter:hover {
+    transform: scale(1.05);
+  }
+}
+
+@keyframes pulsate {
+  0% {
+    transform: scale(1);
+  }
+
+  50% {
+    transform: scale(1.05);
+    box-shadow: 0 1rem 4rem $color-grey-dark-16;
+  }
+
+  100% {
+    transform: scale(1);
+  }
+}

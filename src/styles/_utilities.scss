@@ -1,0 +1,14 @@
+@use "../styles/variables" as *;
+
+.btn {
+  cursor: pointer;
+  border: none;
+  padding: 0.75rem 3rem;
+  border-radius: 0.7rem;
+  background-color: $color-white;
+}
+
+.btn--yellow {
+  color: $color-dark-blue;
+  background-color: $color-yellow;
+}
