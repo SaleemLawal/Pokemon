@@ -9,12 +9,17 @@ import { PokemonProps } from "../../utils/types";
 import { sortPokemon } from "../../utils/helpers";
 import Filter from "../../components/Filter/Filter";
 
-export default function HomePage() {
-const [sortOrder, setSortOrder] = useState<string>("asc-num");
-const [searchTerm, setSearchTerm] = useState<string>("");
-const [pokemonDataSet, setPokemonDataSet] = useState<PokemonProps[]>([]);
-const [filteredData, setFilteredData] = useState<PokemonProps[]>([]);
-const [showFilter, setShowFilter] = useState<boolean>(true);
+export default function HomePage({
+  showFilter,
+  setShowFilter,
+}: {
+  showFilter: boolean;
+  setShowFilter: React.Dispatch<React.SetStateAction<boolean>>;
+}) {
+  const [sortOrder, setSortOrder] = useState<string>("asc-num");
+  const [searchTerm, setSearchTerm] = useState<string>("");
+  const [pokemonDataSet, setPokemonDataSet] = useState<PokemonProps[]>([]);
+  const [filteredData, setFilteredData] = useState<PokemonProps[]>([]);
 
   const handleSortChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
     setSortOrder(e.target.value);
@@ -38,7 +43,7 @@ const [showFilter, setShowFilter] = useState<boolean>(true);
     setFilteredData(filtered);
   };
 
-  const handleShowFilter = () => {
+  const toggleShowFilter = () => {
     setShowFilter((prev) => !prev);
   };
 
@@ -75,7 +80,7 @@ const [showFilter, setShowFilter] = useState<boolean>(true);
           </div>
           <button
             className={`${styles.homepage__filter} btn `}
-            onClick={handleShowFilter}
+            onClick={toggleShowFilter}
           >
             <img src={filterLogo} alt="Filter Logo" />
             Filters
@@ -98,7 +103,12 @@ const [showFilter, setShowFilter] = useState<boolean>(true);
             <p>Loading...</p>
           )}
         </div>
-        {showFilter && <Filter />}
+        {showFilter && (
+          <>
+            <div className={styles.overlay} onClick={toggleShowFilter}></div>
+            <Filter toggleShowFilter={toggleShowFilter} />{" "}
+          </>
+        )}
       </main>
     </div>
   );

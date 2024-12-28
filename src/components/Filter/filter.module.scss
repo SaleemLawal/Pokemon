@@ -1,11 +1,77 @@
 @use "../../styles/variables" as *;
 
 .filter {
-  position: absolute;
-  top: 0;
-  right: 0;
+  position: fixed;
+  top: -1rem;
+  right: 23.3rem;
   background-color: $color-grey-light;
-  padding: 20px;
-  height: 50rem;
-  width: 250px;
+  // background-color: #fff;
+  // min-height: 60vh;
+  width: 25rem;
+  margin-top: 1rem;
+  display: flex;
+  flex-direction: column;
+  z-index: 100;
+
+  &__header {
+    padding: 2rem;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    border-bottom: 1px solid $color-grey-dark-16;
+
+    & button {
+      outline: none;
+      background-color: transparent;
+      border: none;
+      cursor: pointer;
+    }
+  }
+
+  & small {
+    margin-bottom: 1rem;
+    display: block;
+    color: $color-grey-dark-60;
+    padding: 2rem;
+    padding-bottom: 0;
+  }
+
+  &__types {
+    padding: 2rem;
+    padding-top: 0;
+    color: #000;
+    display: flex;
+    gap: 2rem 0;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: space-between;
+
+    &__item {
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+      width: 50%;
+    }
+
+    & p {
+      font-size: 1.2rem;
+      font-weight: 500;
+    }
+  }
+  &__buttons {
+    padding: 2rem;
+
+    display: flex;
+    justify-content: space-between;
+  }
+  &__button {
+    color: $color-dark-blue;
+    background-color: transparent;
+    border: 1px solid $color-blue;
+    font-weight: 600;
+
+    &--filter {
+      background-color: $color-blue;
+    }
+  }
 }

@@ -2,7 +2,7 @@
 
 .homepage {
   font-weight: 700;
-  
+
   &__sort_container {
     display: flex;
     align-items: center;
@@ -39,7 +39,6 @@
     transition: transform 0.3s;
     padding-left: 1.5rem;
     padding-right: 1.5rem;
-
   }
 
   &__filter:active {
@@ -72,4 +71,14 @@
   flex-wrap: wrap;
   row-gap: 7em;
   column-gap: 4%;
+}
+
+.overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background-color: rgba(0, 0, 0, 0.5); 
+  z-index: 10;
 }
