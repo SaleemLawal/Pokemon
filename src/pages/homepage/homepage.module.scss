@@ -2,7 +2,7 @@
 
 .homepage {
   font-weight: 700;
-
+  
   &__sort_container {
     display: flex;
     align-items: center;
@@ -37,6 +37,9 @@
     border-radius: 100px;
     border: 2px solid $color-grey-dark-16;
     transition: transform 0.3s;
+    padding-left: 1.5rem;
+    padding-right: 1.5rem;
+
   }
 
   &__filter:active {

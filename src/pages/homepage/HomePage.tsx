@@ -7,12 +7,14 @@ import React, { useState, useEffect } from "react";
 import { fetchPokemon } from "../../services/pokemonService";
 import { PokemonProps } from "../../utils/types";
 import { sortPokemon } from "../../utils/helpers";
+import Filter from "../../components/Filter/Filter";
 
 export default function HomePage() {
-  const [sortOrder, setSortOrder] = useState("asc-num");
-  const [searchTerm, setSearchTerm] = useState<string>("");
-  const [pokemonDataSet, setPokemonDataSet] = useState<PokemonProps[]>([]);
-  const [filteredData, setFilteredData] = useState<PokemonProps[]>([]);
+const [sortOrder, setSortOrder] = useState<string>("asc-num");
+const [searchTerm, setSearchTerm] = useState<string>("");
+const [pokemonDataSet, setPokemonDataSet] = useState<PokemonProps[]>([]);
+const [filteredData, setFilteredData] = useState<PokemonProps[]>([]);
+const [showFilter, setShowFilter] = useState<boolean>(true);
 
   const handleSortChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
     setSortOrder(e.target.value);
@@ -23,7 +25,7 @@ export default function HomePage() {
       setFilteredData(pokemonDataSet);
       return;
     }
-    
+
     const filtered = pokemonDataSet.filter((pokemon) => {
       const isNameMatch = pokemon.name
         .toLowerCase()
@@ -34,6 +36,10 @@ export default function HomePage() {
       return isNameMatch || isIdMatch;
     });
     setFilteredData(filtered);
+  };
+
+  const handleShowFilter = () => {
+    setShowFilter((prev) => !prev);
   };
 
   useEffect(() => {
@@ -67,7 +73,10 @@ export default function HomePage() {
               <option value="desc-alpha">Alphabetically (Z-A)</option>
             </select>
           </div>
-          <button className={`${styles.homepage__filter} btn `}>
+          <button
+            className={`${styles.homepage__filter} btn `}
+            onClick={handleShowFilter}
+          >
             <img src={filterLogo} alt="Filter Logo" />
             Filters
           </button>
@@ -89,6 +98,7 @@ export default function HomePage() {
             <p>Loading...</p>
           )}
         </div>
+        {showFilter && <Filter />}
       </main>
     </div>
   );

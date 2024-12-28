@@ -1,0 +1,11 @@
+@use "../../styles/variables" as *;
+
+.filter {
+  position: absolute;
+  top: 0;
+  right: 0;
+  background-color: $color-grey-light;
+  padding: 20px;
+  height: 50rem;
+  width: 250px;
+}
