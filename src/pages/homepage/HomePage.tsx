@@ -35,7 +35,7 @@ export default function HomePage({
 
   const handleSearch = () => {
     if (searchTerm === "") {
-      setData(originalData);
+      extractTypeMatch();
       return;
     }
     // gets the pokemon that match by name / id
@@ -84,17 +84,18 @@ export default function HomePage({
       }
     };
     fetchData();
+    console.log(data);
   }, [sortOrder]);
 
   useEffect(() => {
     const sortedData = sortPokemon(data, sortOrder);
     setData(sortedData);
-  }, [sortOrder, data]);
+  }, [sortOrder]);
 
   // Homepage.tsx
   // Pass this to Filter, use it as an action when apply is clicked
   // perform the filtering action in here, but that logic is in Pokemon Card and depends on calls made in Pokemon Card component
-  const handleFilterApply = (): void => {
+  const extractTypeMatch = () => {
     if (filterSelected.length === 0) {
       console.log("No filters selected, resetting data");
       setData(originalData);
@@ -109,7 +110,9 @@ export default function HomePage({
       });
       setData(filtered);
     }
-
+  };
+  const handleFilterApply = (): void => {
+    extractTypeMatch();
     toggleShowFilter();
   };
 
@@ -146,7 +149,12 @@ export default function HomePage({
             className={`${styles.homepage__filter} btn `}
             onClick={toggleShowFilter}
           >
-            <img src={filterLogo} alt="Filter Logo" />
+            {filterSelected.length == 0 && (
+              <img src={filterLogo} alt="Filter Logo" />
+            )}
+            {filterSelected.length > 0 && (
+              <small>{filterSelected.length}</small>
+            )}
             Filters
           </button>
         </div>

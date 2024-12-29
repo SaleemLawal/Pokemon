@@ -8,9 +8,6 @@ export default function SearchBar({
   handleSearch,
 }: SearchBarProps) {
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    // if (e?.target.value === "") {
-    //   setSearchTerm(e?.target.value);
-    // }
     setSearchTerm(e?.target.value);
   };
   return (
