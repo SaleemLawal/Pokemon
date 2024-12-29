@@ -1,7 +1,21 @@
+import React from "react";
+
+type PokemonType = {
+  slot: number;
+  type: {
+    name: string;
+    url: string;
+  };
+};
+
 type PokemonProps = {
   name: string;
-  url: string;
+  url?: string;
   searchTerm?: string;
+  id?: number;
+  types?: PokemonType[];
+  img?: string;
+  image?: string;
 };
 
 type PokemonDetail = {
@@ -30,8 +44,20 @@ type SearchBarProps = {
 };
 
 type FilterProps = {
-  toggleShowFilter: (e: React.MouseEvent<HTMLButtonElement>) => void;
+  toggleShowFilter: () => void;
+  setFilterSelected: React.Dispatch<React.SetStateAction<string[]>>;
+  handleFilterApply?: () => void;
+  resetFilterSelect: () => void;
 };
+
+type CheckBoxProps = {
+  label: string;
+  handleFilterSelect: (filter: string, isChecked: boolean) => void;
+  type: string;
+  isChecked: boolean;
+};
+
+type checkMark = { [key: string]: boolean };
 
 export type {
   PokemonProps,
@@ -39,4 +65,6 @@ export type {
   PokemonData,
   SearchBarProps,
   FilterProps,
+  CheckBoxProps,
+  checkMark,
 };

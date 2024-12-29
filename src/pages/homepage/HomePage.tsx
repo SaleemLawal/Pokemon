@@ -1,25 +1,33 @@
 import Header from "../../components/header/Header";
 import PokemonCard from "../../components/pokemonCard/PokemonCard";
-
 import styles from "./homepage.module.scss";
 import filterLogo from "../../assets/images/octicon_filter-16.svg";
 import React, { useState, useEffect } from "react";
 import { fetchPokemon } from "../../services/pokemonService";
-import { PokemonProps } from "../../utils/types";
+import { checkMark, PokemonProps } from "../../utils/types";
 import { sortPokemon } from "../../utils/helpers";
 import Filter from "../../components/Filter/Filter";
+import axios from "axios";
+import { POKEMON_TYPES } from "../../utils/constants";
 
 export default function HomePage({
   showFilter,
-  setShowFilter,
+  toggleShowFilter,
 }: {
   showFilter: boolean;
-  setShowFilter: React.Dispatch<React.SetStateAction<boolean>>;
+  toggleShowFilter: () => void;
 }) {
   const [sortOrder, setSortOrder] = useState<string>("asc-num");
   const [searchTerm, setSearchTerm] = useState<string>("");
-  const [pokemonDataSet, setPokemonDataSet] = useState<PokemonProps[]>([]);
-  const [filteredData, setFilteredData] = useState<PokemonProps[]>([]);
+  const [originalData, setOriginalData] = useState<PokemonProps[]>([]);
+  const [data, setData] = useState<PokemonProps[]>([]);
+  const [filterSelected, setFilterSelected] = useState<string[]>([]);
+  const [checkedStates, setCheckedStates] = useState<checkMark>(
+    POKEMON_TYPES.reduce((acc, type) => {
+      acc[type] = false;
+      return acc;
+    }, {} as checkMark)
+  );
 
   const handleSortChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
     setSortOrder(e.target.value);
@@ -27,39 +35,95 @@ export default function HomePage({
 
   const handleSearch = () => {
     if (searchTerm === "") {
-      setFilteredData(pokemonDataSet);
+      setData(originalData);
       return;
     }
-
-    const filtered = pokemonDataSet.filter((pokemon) => {
+    // gets the pokemon that match by name / id
+    const filtered = data.filter((pokemon) => {
       const isNameMatch = pokemon.name
         .toLowerCase()
         .includes(searchTerm.toLowerCase());
-
       const isIdMatch =
-        Number(searchTerm) > 0 && pokemon.url.includes(`/${searchTerm}/`);
-      return isNameMatch || isIdMatch;
+        Number(searchTerm) > 0 && pokemon.url?.includes(`/${searchTerm}/`);
+      const isTypeMatch = pokemon.types?.some((item) =>
+        item.type.name.toLowerCase().includes(searchTerm.toLowerCase())
+      );
+      return isNameMatch || isIdMatch || isTypeMatch;
     });
-    setFilteredData(filtered);
-  };
-
-  const toggleShowFilter = () => {
-    setShowFilter((prev) => !prev);
+    setData(filtered);
   };
 
   useEffect(() => {
     const fetchData = async () => {
       try {
         const pokemonList = await fetchPokemon();
-        const sortedPokemonList = sortPokemon(pokemonList, sortOrder);
-        setPokemonDataSet(sortedPokemonList);
-        setFilteredData(pokemonList);
+        const detailedData = await Promise.all(
+          pokemonList.map(async (item: PokemonProps) => {
+            if (!item.url) {
+              return;
+            }
+            const response = await axios.get(item.url);
+            const {
+              id = 0,
+              name,
+              types,
+              sprites: {
+                other: {
+                  "official-artwork": { front_default: img },
+                },
+              },
+            } = response.data;
+            return { id, name, types, img };
+          })
+        );
+        const sortedPokemonList = sortPokemon(detailedData, sortOrder);
+        setOriginalData(sortedPokemonList);
+        setData(sortedPokemonList);
       } catch (err) {
         console.error("Error fetching data:", err);
       }
     };
     fetchData();
   }, [sortOrder]);
+
+  useEffect(() => {
+    const sortedData = sortPokemon(data, sortOrder);
+    setData(sortedData);
+  }, [sortOrder, data]);
+
+  // Homepage.tsx
+  // Pass this to Filter, use it as an action when apply is clicked
+  // perform the filtering action in here, but that logic is in Pokemon Card and depends on calls made in Pokemon Card component
+  const handleFilterApply = (): void => {
+    if (filterSelected.length === 0) {
+      console.log("No filters selected, resetting data");
+      setData(originalData);
+    } else {
+      const filtered = originalData.filter((pokemon) => {
+        const isTypeMatch = pokemon.types?.some((item) =>
+          filterSelected.some(
+            (x) => x.toLowerCase() === item.type.name.toLowerCase()
+          )
+        );
+        return isTypeMatch;
+      });
+      setData(filtered);
+    }
+
+    toggleShowFilter();
+  };
+
+  const resetFilterSelect = (): void => {
+    setCheckedStates(
+      POKEMON_TYPES.reduce((acc, type) => {
+        acc[type] = false;
+        return acc;
+      }, {} as checkMark)
+    );
+    setFilterSelected([]);
+    setData(originalData);
+    toggleShowFilter();
+  };
 
   return (
     <div className={styles.homepage}>
@@ -88,13 +152,15 @@ export default function HomePage({
         </div>
 
         <div className={styles.pokemons}>
-          {filteredData ? (
-            filteredData.map((pokemon: PokemonProps) => {
+          {data ? (
+            data.map((pokemon: PokemonProps) => {
               return (
                 <PokemonCard
-                  name={pokemon.name}
-                  url={pokemon.url}
                   key={pokemon.name}
+                  id={pokemon.id}
+                  name={pokemon.name}
+                  types={pokemon.types}
+                  image={pokemon.img}
                   searchTerm={searchTerm}
                 />
               );
@@ -106,7 +172,14 @@ export default function HomePage({
         {showFilter && (
           <>
             <div className={styles.overlay} onClick={toggleShowFilter}></div>
-            <Filter toggleShowFilter={toggleShowFilter} />{" "}
+            <Filter
+              toggleShowFilter={toggleShowFilter}
+              setFilterSelected={setFilterSelected}
+              handleFilterApply={handleFilterApply}
+              resetFilterSelect={resetFilterSelect}
+              checkedStates={checkedStates}
+              setCheckedStates={setCheckedStates}
+            />
           </>
         )}
       </main>

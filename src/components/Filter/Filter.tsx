@@ -1,11 +1,34 @@
 import styles from "./filter.module.scss";
 import close from "../../assets/images/Close.svg";
-import emptyCheckBox from "../../assets/images/empty-checkbox.svg";
 import { POKEMON_TYPES } from "../../utils/constants";
-import { FilterProps } from "../../utils/types";
-// import React from "react";
+import { checkMark, FilterProps } from "../../utils/types";
+import CheckBox from "../checkBox/CheckBox";
 
-export default function Filter({ toggleShowFilter }: FilterProps) {
+export default function Filter({
+  toggleShowFilter,
+  setFilterSelected,
+  handleFilterApply,
+  checkedStates,
+  resetFilterSelect,
+  setCheckedStates,
+}: FilterProps & {
+  checkedStates: checkMark;
+  setCheckedStates: React.Dispatch<React.SetStateAction<checkMark>>;
+}) {
+
+  const handleFilterSelect = (filter: string, isChecked: boolean) => {
+    setCheckedStates((prev) => ({
+      ...prev,
+      [filter]: isChecked,
+    }));
+
+    if (isChecked) {
+      setFilterSelected((prev) => [...prev, filter]);
+    } else {
+      setFilterSelected((prev) => prev.filter((item) => item !== filter));
+    }
+  };
+
   return (
     <div className={styles.filter}>
       <div className={styles.filter__header}>
@@ -17,19 +40,27 @@ export default function Filter({ toggleShowFilter }: FilterProps) {
       <small className="subtext-2">Type</small>
       <div className={styles.filter__types}>
         {POKEMON_TYPES.map((type) => (
-          <div key={type} className={styles.filter__types__item}>
-            <img src={emptyCheckBox} alt="Empty check box" />
-            <p>{type.charAt(0).toUpperCase() + type.slice(1)}</p>
-          </div>
+          <CheckBox
+            key={type}
+            label={type.charAt(0).toUpperCase() + type.slice(1)}
+            type={type}
+            handleFilterSelect={handleFilterSelect}
+            isChecked={checkedStates[type]}
+          />
         ))}
       </div>
 
       <div className={styles.filter__buttons}>
-        <button className={`${styles.filter__button} btn`}>
+        <button
+          className={`${styles.filter__button} btn`}
+          onClick={resetFilterSelect}
+        >
           Reset Filters
         </button>
+
         <button
           className={`${styles.filter__button} ${styles["filter__button--filter"]} btn`}
+          onClick={handleFilterApply}
         >
           Apply Filters
         </button>
