@@ -84,7 +84,6 @@ export default function HomePage({
       }
     };
     fetchData();
-    console.log(data);
   }, [sortOrder]);
 
   useEffect(() => {
@@ -179,7 +178,7 @@ export default function HomePage({
         </div>
         {showFilter && (
           <>
-            <div className={styles.overlay} onClick={toggleShowFilter}></div>
+            <div className={`overlay`} onClick={toggleShowFilter}></div>
             <Filter
               toggleShowFilter={toggleShowFilter}
               setFilterSelected={setFilterSelected}
