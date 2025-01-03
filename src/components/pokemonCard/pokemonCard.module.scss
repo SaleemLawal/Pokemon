@@ -11,13 +11,13 @@
   justify-content: flex-end;
   cursor: pointer;
 
-  @media (max-width: 725px) {
+  @media (max-width: 45.3em) { // 725
     width: 47%;
     max-width: none;
     height: 20rem;
   }
 
-  @media (max-width: 400px) {
+  @media (max-width: 25em) { // 400
     width: 75%;
     margin-inline: auto;
   }
@@ -30,12 +30,12 @@
     left: 50%;
     transform: translate(-50%, -50%);
 
-    @media (max-width: 725px) {
+    @media (max-width: 45.3em) { // 725
       width: 15rem;
       height: 15rem;
     }
 
-    @media (max-width: 435px) {
+    @media (max-width: 27.18em) { // 435
       width: 12.5rem;
       height: 12.5rem;
     }

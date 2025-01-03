@@ -10,11 +10,11 @@
   transition: opacity 0.3s ease-in-out;
   max-width: 55rem;
 
-  @media (max-width: 836px) {
+  @media (max-width: 52.25em) { // 836
     width: 50rem;
   }
 
-  @media (max-width: 485px) {
+  @media (max-width: 30.31em) { // 485
     width: 40rem;
   }
 

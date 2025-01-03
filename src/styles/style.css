@@ -222,7 +222,7 @@ html {
   font-size: 62.5%;
   font-family: "Roboto", serif;
 }
-@media (max-width: 800px) {
+@media (max-width: 50em) {
   html {
     font-size: 56.25%;
   }
@@ -247,6 +247,11 @@ img {
   position: relative;
   z-index: 1;
 }
+@media (max-width: 25em) {
+  .container {
+    padding: 1.5rem;
+  }
+}
 
 .header {
   margin-bottom: 3rem;
@@ -270,6 +275,19 @@ img {
   justify-content: flex-end;
   cursor: pointer;
 }
+@media (max-width: 45.3em) {
+  .pokemon {
+    width: 47%;
+    max-width: none;
+    height: 20rem;
+  }
+}
+@media (max-width: 25em) {
+  .pokemon {
+    width: 75%;
+    margin-inline: auto;
+  }
+}
 .pokemon__img {
   width: 12.5rem;
   height: 12.5rem;
@@ -277,6 +295,18 @@ img {
   top: 0;
   left: 50%;
   transform: translate(-50%, -50%);
+}
+@media (max-width: 45.3em) {
+  .pokemon__img {
+    width: 15rem;
+    height: 15rem;
+  }
+}
+@media (max-width: 27.18em) {
+  .pokemon__img {
+    width: 12.5rem;
+    height: 12.5rem;
+  }
 }
 .pokemon__header {
   color: #fff;
