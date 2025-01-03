@@ -1,8 +1,13 @@
-// import React from 'react'
 import { ArrowLeft } from "lucide-react";
 import styles from "./PokemonHeader.module.scss";
 
-const PokemonHeader = () => {
+const PokemonHeader = ({
+  setShowDetail,
+}: {
+  setShowDetail: React.Dispatch<
+    React.SetStateAction<{ show: boolean; id: number | null }>
+  >;
+}) => {
   const img =
     "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/5.png";
   const types = [
@@ -13,7 +18,10 @@ const PokemonHeader = () => {
   ];
   return (
     <div className={styles["pokemon--header--container"]}>
-      <ArrowLeft className={`${styles["pokemon--header__arrow"]}`} />
+      <ArrowLeft
+        className={`${styles["pokemon--header__arrow"]}`}
+        onClick={() => setShowDetail({ show: false, id: null })}
+      />
       <div className={`${styles["pokemon--header"]}`}>
         <img
           src={img}

@@ -1,7 +1,7 @@
 @use "../../styles/variables" as *;
 
-.pokemon--header--container{
-    padding: 3rem;
+.pokemon--header--container {
+  padding: 3rem;
 }
 .pokemon--header {
   display: flex;
@@ -16,6 +16,7 @@
     width: 2rem;
     height: 2rem;
     color: $color-white-80;
+    cursor: pointer;
   }
 
   & p {

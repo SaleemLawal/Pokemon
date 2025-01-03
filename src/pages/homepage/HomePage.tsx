@@ -215,7 +215,7 @@ export default function HomePage({
                 setShowDetail({ show: false, id: null });
               }}
             ></div>
-            <PokemonDetail />
+            <PokemonDetail setShowDetail={setShowDetail}/>
           </>
         )}
       </main>

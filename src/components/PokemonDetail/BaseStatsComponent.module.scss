@@ -1,4 +1,12 @@
 .base--stats {
-  margin-top: 0.5rem;
-  padding: 1rem;
+  padding: 2rem;
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+
+  & div {
+    display: grid;
+    grid-template-columns: 0.25fr 0.1fr 1fr;
+    align-items: center;
+  }
 }
