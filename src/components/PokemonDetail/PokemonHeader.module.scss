@@ -2,14 +2,27 @@
 
 .pokemon--header--container {
   padding: 3rem;
+
+  @media (max-width: 826px) {
+    padding-bottom: 1rem;
+  }
 }
 .pokemon--header {
   display: flex;
   justify-content: center;
 
+  @media (max-width: 826px) {
+    flex-direction: column;
+    align-items: center;
+  }
+
   &__img {
     max-width: 30%;
     margin-right: 2rem;
+
+    @media (max-width: 826px) {
+      margin-bottom: 2rem;
+    }
   }
 
   &__arrow {
@@ -21,6 +34,10 @@
 
   & p {
     color: $color-white-80;
+
+    @media (max-width: 826px) {
+      text-align: center;
+    }
   }
 
   & h1 {

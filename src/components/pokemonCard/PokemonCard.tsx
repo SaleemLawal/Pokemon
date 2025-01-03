@@ -25,7 +25,6 @@ export default function PokemonCard({
 
   const handleShowModal = () => {
     setShowDetail({ show: true, id: id});
-    console.log("Clicked div ");
   };
 
   return (

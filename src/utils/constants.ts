@@ -16,5 +16,7 @@ const POKEMON_TYPES = [
   "fairy",
   "electric",
   "steel",
+  "ice",
+  "dark"
 ];
 export { API_ENDPOINT, POKEMON_TYPES };

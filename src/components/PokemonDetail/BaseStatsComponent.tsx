@@ -16,7 +16,6 @@ const BaseStatsComponent = ({
   }[];
   type: string;
 }) => {
-  console.log(type);
   return (
     <div className={styles["base--stats"]}>
       {stats.map((statInfo, index) => {

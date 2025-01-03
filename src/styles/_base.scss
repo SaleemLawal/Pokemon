@@ -10,6 +10,10 @@
 html {
   font-size: 62.5%;
   font-family: "Roboto", serif;
+
+  @media (max-width: 800px) {
+    font-size: 56.25%;
+  }
 }
 
 body {
@@ -21,5 +25,3 @@ img {
   max-width: 100%;
   display: block;
 }
-
-

@@ -115,12 +115,10 @@ export default function HomePage({
   // Pass this to Filter, use it as an action when apply is clicked
   // perform the filtering action in here, but that logic is in Pokemon Card and depends on calls made in Pokemon Card component
   const extractTypeMatch = useCallback(() => {
-    console.log("triggered");
     if (filterSelected.length === 0) {
       console.log("No filters selected, resetting data");
       setData(originalData);
     } else {
-      console.log(originalData);
       const filtered = originalData.filter((pokemon) => {
         const isTypeMatch = pokemon.types?.some((item) =>
           filterSelected.some(

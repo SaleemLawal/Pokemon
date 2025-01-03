@@ -10,5 +10,13 @@
     display: grid;
     grid-template-columns: 0.25fr 0.1fr 1fr;
     align-items: center;
+
+    @media (max-width: 975px) {
+      grid-template-columns: 0.5fr 0.1fr 1fr;
+    }
+
+    @media (max-width: 485px) {
+      gap: 0.5rem;
+    }
   }
 }

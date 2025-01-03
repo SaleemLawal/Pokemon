@@ -8,6 +8,15 @@
   overflow: hidden;
   opacity: 0;
   transition: opacity 0.3s ease-in-out;
+  max-width: 55rem;
+
+  @media (max-width: 836px) {
+    width: 50rem;
+  }
+
+  @media (max-width: 485px) {
+    width: 40rem;
+  }
 
   &.fade-in {
     opacity: 1;
