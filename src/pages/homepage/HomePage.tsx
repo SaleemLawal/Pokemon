@@ -52,6 +52,9 @@ export default function HomePage({
     name: "",
     img: "",
   });
+  const [paginationSize, setPaginationSize] = useState<
+    "large" | "medium" | "small"
+  >("large");
 
   const handleSortChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
     setSortOrder(e.target.value);
@@ -182,6 +185,21 @@ export default function HomePage({
     if (showDetail.id) fetch();
   }, [showDetail.id]);
 
+  useEffect(() => {
+    const handleResize = () => {
+      if (window.innerWidth <= 380) {
+        setPaginationSize("small");
+      } else if (window.innerWidth <= 475) {
+        setPaginationSize("medium");
+      } else {
+        setPaginationSize("large");
+      }
+    };
+    handleResize();
+    window.addEventListener("resize", handleResize);
+    return () => window.removeEventListener("resize", handleResize);
+  }, []);
+
   const handleFilterApply = (): void => {
     extractTypeMatch();
     toggleShowFilter();
@@ -290,7 +308,7 @@ export default function HomePage({
           variant="outlined"
           shape="rounded"
           color="standard"
-          size="large"
+          size={paginationSize}
           className={styles.pagination}
         />
       </main>
