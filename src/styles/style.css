@@ -96,11 +96,25 @@
   background-color: #ff5e60 !important;
 }
 
+.ice {
+  background-color: #aefff4;
+}
+.ice .MuiLinearProgress-bar {
+  background-color: #aefff4 !important;
+}
+
 .dragon {
   background-color: #87c5ff;
 }
 .dragon .MuiLinearProgress-bar {
   background-color: #87c5ff !important;
+}
+
+.dark {
+  background-color: #8f8f8f;
+}
+.dark .MuiLinearProgress-bar {
+  background-color: #8f8f8f !important;
 }
 
 .fairy {
@@ -172,12 +186,20 @@
   background-color: #c4484a;
 }
 
+.ice--background {
+  background-color: #3a9d90;
+}
+
 .dragon--background {
   background-color: #1268b8;
 }
 
 .fairy--background {
   background-color: #c01a8d;
+}
+
+.dark--background {
+  background-color: #373737;
 }
 
 .electric--background {
@@ -385,6 +407,12 @@ img {
   flex-wrap: wrap;
   row-gap: 7em;
   column-gap: 4%;
+}
+
+.pagination {
+  margin-top: 3rem;
+  display: flex;
+  justify-content: center;
 }
 
 .overlay {

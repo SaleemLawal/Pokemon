@@ -2,7 +2,7 @@ import Header from "../../components/header/Header";
 import PokemonCard from "../../components/pokemonCard/PokemonCard";
 import styles from "./homepage.module.scss";
 import filterLogo from "../../assets/images/octicon_filter-16.svg";
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useCallback } from "react";
 import { fetchPokemon } from "../../services/pokemonService";
 import { checkMark, pokemonInfoProps, PokemonProps } from "../../utils/types";
 import { sortPokemon } from "../../utils/helpers";
@@ -10,6 +10,7 @@ import Filter from "../../components/Filter/Filter";
 import axios from "axios";
 import { POKEMON_TYPES } from "../../utils/constants";
 import PokemonDetail from "@/components/PokemonDetail/PokemonDetail";
+import { Pagination } from "@mui/material";
 
 export default function HomePage({
   showFilter,
@@ -18,6 +19,11 @@ export default function HomePage({
   showFilter: boolean;
   toggleShowFilter: () => void;
 }) {
+  const itemsPerPage = 20;
+  const totalPokemon = 1010;
+  const totalPages = Math.ceil(totalPokemon / itemsPerPage);
+  const [currentPage, setCurrentPage] = useState(1);
+
   const [sortOrder, setSortOrder] = useState<string>("asc-num");
   const [searchTerm, setSearchTerm] = useState<string>("");
   const [originalData, setOriginalData] = useState<PokemonProps[]>([]);
@@ -72,9 +78,10 @@ export default function HomePage({
   };
 
   useEffect(() => {
-    const fetchData = async () => {
+    const fetchData = async (page: number) => {
       try {
-        const pokemonList = await fetchPokemon();
+        const offset = (page - 1) * itemsPerPage;
+        const pokemonList = await fetchPokemon(offset); // [0, 20] inclusive
         const detailedData = await Promise.all(
           pokemonList.map(async (item: PokemonProps) => {
             if (!item.url) {
@@ -101,8 +108,38 @@ export default function HomePage({
         console.error("Error fetching data:", err);
       }
     };
-    fetchData();
-  }, [sortOrder]);
+    fetchData(currentPage);
+  }, [sortOrder, currentPage]);
+
+  // Homepage.tsx
+  // Pass this to Filter, use it as an action when apply is clicked
+  // perform the filtering action in here, but that logic is in Pokemon Card and depends on calls made in Pokemon Card component
+  const extractTypeMatch = useCallback(() => {
+    console.log("triggered");
+    if (filterSelected.length === 0) {
+      console.log("No filters selected, resetting data");
+      setData(originalData);
+    } else {
+      console.log(originalData);
+      const filtered = originalData.filter((pokemon) => {
+        const isTypeMatch = pokemon.types?.some((item) =>
+          filterSelected.some(
+            (x) => x.toLowerCase() === item.type.name.toLowerCase()
+          )
+        );
+        return isTypeMatch;
+      });
+      setData(filtered);
+    }
+  }, [filterSelected, originalData]);
+
+  useEffect(() => {
+    if (filterSelected.length > 0) {
+      extractTypeMatch();
+    } else {
+      setData(originalData);
+    }
+  }, [filterSelected, originalData, extractTypeMatch]);
 
   useEffect(() => {
     const sortedData = sortPokemon(data, sortOrder);
@@ -147,28 +184,13 @@ export default function HomePage({
     if (showDetail.id) fetch();
   }, [showDetail.id]);
 
-  // Homepage.tsx
-  // Pass this to Filter, use it as an action when apply is clicked
-  // perform the filtering action in here, but that logic is in Pokemon Card and depends on calls made in Pokemon Card component
-  const extractTypeMatch = () => {
-    if (filterSelected.length === 0) {
-      console.log("No filters selected, resetting data");
-      setData(originalData);
-    } else {
-      const filtered = originalData.filter((pokemon) => {
-        const isTypeMatch = pokemon.types?.some((item) =>
-          filterSelected.some(
-            (x) => x.toLowerCase() === item.type.name.toLowerCase()
-          )
-        );
-        return isTypeMatch;
-      });
-      setData(filtered);
-    }
-  };
   const handleFilterApply = (): void => {
     extractTypeMatch();
     toggleShowFilter();
+  };
+
+  const handlePageChange = (_: React.ChangeEvent<unknown>, page: number) => {
+    setCurrentPage(page);
   };
 
   const resetFilterSelect = (): void => {
@@ -262,6 +284,17 @@ export default function HomePage({
             />
           </>
         )}
+
+        <Pagination
+          count={totalPages}
+          page={currentPage}
+          onChange={handlePageChange}
+          variant="outlined"
+          shape="rounded"
+          color="standard"
+          size="large"
+          className={styles.pagination}
+        />
       </main>
     </div>
   );

@@ -110,11 +110,27 @@
   }
 }
 
+.ice {
+  background-color: $color-ice-tag;
+
+  .MuiLinearProgress-bar {
+    background-color: $color-ice-tag !important;
+  }
+}
+
 .dragon {
   background-color: $color-dragon-tag;
 
   .MuiLinearProgress-bar {
     background-color: $color-dragon-tag !important;
+  }
+}
+
+.dark {
+  background-color: $color-dark-tag;
+
+  .MuiLinearProgress-bar {
+    background-color: $color-dark-tag !important;
   }
 }
 
@@ -192,12 +208,20 @@
   background-color: $color-psychic-background;
 }
 
+.ice--background {
+  background-color: $color-ice-background;
+}
+
 .dragon--background {
   background-color: $color-dragon-background;
 }
 
 .fairy--background {
   background-color: $color-fairy-background;
+}
+
+.dark--background {
+  background-color: $color-dark-background;
 }
 
 .electric--background {
