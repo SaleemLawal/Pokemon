@@ -3,19 +3,19 @@ import styles from "./PokemonHeader.module.scss";
 
 const PokemonHeader = ({
   setShowDetail,
+  id,
+  name,
+  types,
+  img,
 }: {
   setShowDetail: React.Dispatch<
     React.SetStateAction<{ show: boolean; id: number | null }>
   >;
+  id: number;
+  name: string;
+  types: { slot: number; type: { name: string; url: string } }[];
+  img: string;
 }) => {
-  const img =
-    "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/5.png";
-  const types = [
-    {
-      slot: 5,
-      type: { name: "fire" },
-    },
-  ];
   return (
     <div className={styles["pokemon--header--container"]}>
       <ArrowLeft
@@ -30,8 +30,8 @@ const PokemonHeader = ({
         />
 
         <div className="pokemon--header__bio">
-          <p className="heading-s">#5</p>
-          <h1 className="heading-l">Charmaleon</h1>
+          <p className="heading-s">#{id}</p>
+          <h1 className="heading-l">{name}</h1>
           <ul className={`${styles["pokemon--header__list"]}`}>
             {types?.map((typeInfo) => (
               <li

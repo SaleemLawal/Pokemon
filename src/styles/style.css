@@ -15,129 +15,113 @@
 .grass {
   background-color: #80e177;
 }
-
-.fire {
-  background-color: #ff6464;
-}
-
-.bug {
-  background-color: #c9ff84;
-}
-
-.water {
-  background-color: #9ff3ff;
-}
-
-.flying {
-  background-color: #cbe9ff;
-}
-
-.poison {
-  background-color: #d89cfd;
-}
-
-.normal {
-  background-color: #cbcbcb;
-}
-
-.rock {
-  background-color: #cfc06f;
-}
-
-.ground {
-  background-color: #fffb72;
-}
-
-.fighting {
-  background-color: #ff699f;
-}
-
-.ghost {
-  background-color: #b592ff;
-}
-
-.psychic {
-  background-color: #ff5e60;
-}
-
-.dragon {
-  background-color: #87c5ff;
-}
-
-.fairy {
-  background-color: #ffa2e3;
-}
-
-.electric {
-  background-color: #fffa86;
-}
-
-.steel {
-  background-color: #a4ffe9;
-}
-
-.grass {
-  background-color: #80e177;
+.grass .MuiLinearProgress-bar {
+  background-color: #80e177 !important;
 }
 
 .fire {
   background-color: #ff6464;
 }
+.fire .MuiLinearProgress-bar {
+  background-color: #ff6464 !important;
+}
 
 .bug {
   background-color: #c9ff84;
+}
+.bug .MuiLinearProgress-bar {
+  background-color: #c9ff84 !important;
 }
 
 .water {
   background-color: #9ff3ff;
 }
+.water .MuiLinearProgress-bar {
+  background-color: #9ff3ff !important;
+}
 
 .flying {
   background-color: #cbe9ff;
+}
+.flying .MuiLinearProgress-bar {
+  background-color: #cbe9ff !important;
 }
 
 .poison {
   background-color: #d89cfd;
 }
+.poison .MuiLinearProgress-bar {
+  background-color: #d89cfd !important;
+}
 
 .normal {
   background-color: #cbcbcb;
+}
+.normal .MuiLinearProgress-bar {
+  background-color: #cbcbcb !important;
 }
 
 .rock {
   background-color: #cfc06f;
 }
+.rock .MuiLinearProgress-bar {
+  background-color: #cfc06f !important;
+}
 
 .ground {
   background-color: #fffb72;
+}
+.ground .MuiLinearProgress-bar {
+  background-color: #fffb72 !important;
 }
 
 .fighting {
   background-color: #ff699f;
 }
+.fighting .MuiLinearProgress-bar {
+  background-color: #ff699f !important;
+}
 
 .ghost {
   background-color: #b592ff;
+}
+.ghost .MuiLinearProgress-bar {
+  background-color: #b592ff !important;
 }
 
 .psychic {
   background-color: #ff5e60;
 }
+.psychic .MuiLinearProgress-bar {
+  background-color: #ff5e60 !important;
+}
 
 .dragon {
   background-color: #87c5ff;
+}
+.dragon .MuiLinearProgress-bar {
+  background-color: #87c5ff !important;
 }
 
 .fairy {
   background-color: #ffa2e3;
 }
+.fairy .MuiLinearProgress-bar {
+  background-color: #ffa2e3 !important;
+}
 
 .electric {
   background-color: #fffa86;
 }
+.electric .MuiLinearProgress-bar {
+  background-color: #fffa86 !important;
+}
 
 .steel {
   background-color: #a4ffe9;
+}
+.steel .MuiLinearProgress-bar {
+  background-color: #a4ffe9 !important;
 }
 
 .grass--background {

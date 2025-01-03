@@ -4,7 +4,7 @@ import styles from "./homepage.module.scss";
 import filterLogo from "../../assets/images/octicon_filter-16.svg";
 import React, { useState, useEffect } from "react";
 import { fetchPokemon } from "../../services/pokemonService";
-import { checkMark, PokemonProps } from "../../utils/types";
+import { checkMark, pokemonInfoProps, PokemonProps } from "../../utils/types";
 import { sortPokemon } from "../../utils/helpers";
 import Filter from "../../components/Filter/Filter";
 import axios from "axios";
@@ -36,7 +36,16 @@ export default function HomePage({
     show: false,
     id: null,
   });
-  console.log(showDetail);
+  const [pokemonInfo, setPokemonInfo] = useState<pokemonInfoProps>({
+    types: [],
+    stats: [],
+    height: 0,
+    weight: 0,
+    abilities: [],
+    id: 0,
+    name: "",
+    img: "",
+  });
 
   const handleSortChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
     setSortOrder(e.target.value);
@@ -100,11 +109,43 @@ export default function HomePage({
     setData(sortedData);
   }, [sortOrder]);
 
-  // useEffect(() => {
-  //   if (showDetail.id) {
-      
-  //   }
-  // }, [showDetail.id]);
+  useEffect(() => {
+    const fetch = async () => {
+      try {
+        const response = await axios.get(
+          `https://pokeapi.co/api/v2/pokemon/${showDetail.id}`
+        );
+
+        const {
+          types,
+          stats,
+          height,
+          weight,
+          abilities,
+          id,
+          name,
+          sprites: {
+            other: {
+              "official-artwork": { front_default: img },
+            },
+          },
+        } = response.data;
+        setPokemonInfo({
+          types,
+          stats,
+          height,
+          weight,
+          abilities,
+          id,
+          name,
+          img,
+        });
+      } catch (error) {
+        console.log("Error from", error);
+      }
+    };
+    if (showDetail.id) fetch();
+  }, [showDetail.id]);
 
   // Homepage.tsx
   // Pass this to Filter, use it as an action when apply is clicked
@@ -215,7 +256,10 @@ export default function HomePage({
                 setShowDetail({ show: false, id: null });
               }}
             ></div>
-            <PokemonDetail setShowDetail={setShowDetail}/>
+            <PokemonDetail
+              setShowDetail={setShowDetail}
+              pokemonInfo={pokemonInfo}
+            />
           </>
         )}
       </main>

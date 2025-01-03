@@ -63,6 +63,31 @@ type CheckBoxProps = {
 
 type checkMark = { [key: string]: boolean };
 
+type pokemonInfoProps = {
+  types: { slot: number; type: { name: string; url: string } }[];
+  stats: {
+    base_stat: number;
+    effort: number;
+    stat: {
+      name: string;
+      url: string;
+    };
+  }[];
+  height: number;
+  weight: number;
+  abilities: {
+    ability: {
+      name: string;
+      url: string;
+    };
+    is_hidden: boolean;
+    slot: number;
+  }[];
+  id: number;
+  name: string;
+  img:string;
+};
+
 export type {
   PokemonProps,
   PokemonDetail,
@@ -71,4 +96,5 @@ export type {
   FilterProps,
   CheckBoxProps,
   checkMark,
+  pokemonInfoProps
 };

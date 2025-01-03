@@ -4,7 +4,33 @@ import AboutComponent from "./AboutComponent";
 import BaseStatsComponent from "./BaseStatsComponent";
 import EvolutionComponent from "./EvolutionComponent";
 
-const PokemonInfo = () => {
+const PokemonInfo = ({
+  stats,
+  height,
+  weight,
+  abilities,
+  types,
+}: {
+  types: { slot: number; type: { name: string; url: string } }[];
+  stats: {
+    base_stat: number;
+    effort: number;
+    stat: {
+      name: string;
+      url: string;
+    };
+  }[];
+  height: number;
+  weight: number;
+  abilities: {
+    ability: {
+      name: string;
+      url: string;
+    };
+    is_hidden: boolean;
+    slot: number;
+  }[];
+}) => {
   const [activeTab, setActiveTab] = useState("about");
   return (
     <div className={styles["pokemon--info"]}>
@@ -36,8 +62,17 @@ const PokemonInfo = () => {
       </ul>
 
       <div>
-        {activeTab === "about" && <AboutComponent />}
-        {activeTab === "base-stats" && <BaseStatsComponent />}
+        {activeTab === "about" && (
+          <AboutComponent
+            types={types}
+            height={height}
+            weight={weight}
+            abilities={abilities}
+          />
+        )}
+        {activeTab === "base-stats" && (
+          <BaseStatsComponent stats={stats} type={types[0].type.name} />
+        )}
         {activeTab === "evolution" && <EvolutionComponent />}
       </div>
     </div>
