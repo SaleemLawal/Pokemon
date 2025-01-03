@@ -1,0 +1,40 @@
+@use "../../styles/variables" as *;
+
+.pokemon--header--container {
+  padding: 3rem;
+}
+.pokemon--header {
+  display: flex;
+  justify-content: center;
+
+  &__img {
+    max-width: 30%;
+    margin-right: 2rem;
+  }
+
+  &__arrow {
+    width: 2rem;
+    height: 2rem;
+    color: $color-white-80;
+    cursor: pointer;
+  }
+
+  & p {
+    color: $color-white-80;
+  }
+
+  & h1 {
+    color: $color-white;
+  }
+
+  &__list {
+    list-style: none;
+    display: flex;
+    gap: 0.5rem;
+  }
+
+  &__item {
+    padding: 0.25rem 1rem;
+    border-radius: 100px;
+  }
+}

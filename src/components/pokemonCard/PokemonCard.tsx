@@ -1,7 +1,6 @@
 import { PokemonProps } from "../../utils/types";
 import styles from "./pokemonCard.module.scss";
 import "../../styles/_typography.scss";
-import { useState } from "react";
 
 export default function PokemonCard({
   id,
@@ -9,8 +8,8 @@ export default function PokemonCard({
   types,
   image,
   searchTerm,
+  setShowDetail,
 }: PokemonProps) {
-  const [showDetail, setShowDetail] = useState(false);
   const matchesSearch =
     searchTerm === "" ||
     searchTerm == null ||
@@ -25,7 +24,7 @@ export default function PokemonCard({
   }
 
   const handleShowModal = () => {
-    setShowDetail(true);
+    setShowDetail({ show: true, id: id});
     console.log("Clicked div ");
   };
 
@@ -50,19 +49,6 @@ export default function PokemonCard({
           </li>
         ))}
       </ul>
-
-      {showDetail && (
-        <>
-          <div
-            className={`overlay`}
-            onClick={(event) => {
-              event.stopPropagation();
-              setShowDetail(false);
-            }}
-          ></div>
-          
-        </>
-      )}
     </div>
   );
 }

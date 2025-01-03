@@ -2,13 +2,15 @@ import Header from "../../components/header/Header";
 import PokemonCard from "../../components/pokemonCard/PokemonCard";
 import styles from "./homepage.module.scss";
 import filterLogo from "../../assets/images/octicon_filter-16.svg";
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useCallback } from "react";
 import { fetchPokemon } from "../../services/pokemonService";
-import { checkMark, PokemonProps } from "../../utils/types";
+import { checkMark, pokemonInfoProps, PokemonProps } from "../../utils/types";
 import { sortPokemon } from "../../utils/helpers";
 import Filter from "../../components/Filter/Filter";
 import axios from "axios";
 import { POKEMON_TYPES } from "../../utils/constants";
+import PokemonDetail from "@/components/PokemonDetail/PokemonDetail";
+import { Pagination } from "@mui/material";
 
 export default function HomePage({
   showFilter,
@@ -17,6 +19,11 @@ export default function HomePage({
   showFilter: boolean;
   toggleShowFilter: () => void;
 }) {
+  const itemsPerPage = 20;
+  const totalPokemon = 1010;
+  const totalPages = Math.ceil(totalPokemon / itemsPerPage);
+  const [currentPage, setCurrentPage] = useState(1);
+
   const [sortOrder, setSortOrder] = useState<string>("asc-num");
   const [searchTerm, setSearchTerm] = useState<string>("");
   const [originalData, setOriginalData] = useState<PokemonProps[]>([]);
@@ -28,6 +35,23 @@ export default function HomePage({
       return acc;
     }, {} as checkMark)
   );
+  const [showDetail, setShowDetail] = useState<{
+    show: boolean;
+    id: number | null;
+  }>({
+    show: false,
+    id: null,
+  });
+  const [pokemonInfo, setPokemonInfo] = useState<pokemonInfoProps>({
+    types: [],
+    stats: [],
+    height: 0,
+    weight: 0,
+    abilities: [],
+    id: 0,
+    name: "",
+    img: "",
+  });
 
   const handleSortChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
     setSortOrder(e.target.value);
@@ -54,9 +78,10 @@ export default function HomePage({
   };
 
   useEffect(() => {
-    const fetchData = async () => {
+    const fetchData = async (page: number) => {
       try {
-        const pokemonList = await fetchPokemon();
+        const offset = (page - 1) * itemsPerPage;
+        const pokemonList = await fetchPokemon(offset); // [0, 20] inclusive
         const detailedData = await Promise.all(
           pokemonList.map(async (item: PokemonProps) => {
             if (!item.url) {
@@ -83,22 +108,19 @@ export default function HomePage({
         console.error("Error fetching data:", err);
       }
     };
-    fetchData();
-  }, [sortOrder]);
-
-  useEffect(() => {
-    const sortedData = sortPokemon(data, sortOrder);
-    setData(sortedData);
-  }, [sortOrder]);
+    fetchData(currentPage);
+  }, [sortOrder, currentPage]);
 
   // Homepage.tsx
   // Pass this to Filter, use it as an action when apply is clicked
   // perform the filtering action in here, but that logic is in Pokemon Card and depends on calls made in Pokemon Card component
-  const extractTypeMatch = () => {
+  const extractTypeMatch = useCallback(() => {
+    console.log("triggered");
     if (filterSelected.length === 0) {
       console.log("No filters selected, resetting data");
       setData(originalData);
     } else {
+      console.log(originalData);
       const filtered = originalData.filter((pokemon) => {
         const isTypeMatch = pokemon.types?.some((item) =>
           filterSelected.some(
@@ -109,10 +131,66 @@ export default function HomePage({
       });
       setData(filtered);
     }
-  };
+  }, [filterSelected, originalData]);
+
+  useEffect(() => {
+    if (filterSelected.length > 0) {
+      extractTypeMatch();
+    } else {
+      setData(originalData);
+    }
+  }, [filterSelected, originalData, extractTypeMatch]);
+
+  useEffect(() => {
+    const sortedData = sortPokemon(data, sortOrder);
+    setData(sortedData);
+  }, [sortOrder]);
+
+  useEffect(() => {
+    const fetch = async () => {
+      try {
+        const response = await axios.get(
+          `https://pokeapi.co/api/v2/pokemon/${showDetail.id}`
+        );
+
+        const {
+          types,
+          stats,
+          height,
+          weight,
+          abilities,
+          id,
+          name,
+          sprites: {
+            other: {
+              "official-artwork": { front_default: img },
+            },
+          },
+        } = response.data;
+        setPokemonInfo({
+          types,
+          stats,
+          height,
+          weight,
+          abilities,
+          id,
+          name,
+          img,
+        });
+      } catch (error) {
+        console.log("Error from", error);
+      }
+    };
+    if (showDetail.id) fetch();
+  }, [showDetail.id]);
+
   const handleFilterApply = (): void => {
     extractTypeMatch();
     toggleShowFilter();
+  };
+
+  const handlePageChange = (_: React.ChangeEvent<unknown>, page: number) => {
+    setCurrentPage(page);
   };
 
   const resetFilterSelect = (): void => {
@@ -169,6 +247,8 @@ export default function HomePage({
                   types={pokemon.types}
                   image={pokemon.img}
                   searchTerm={searchTerm}
+                  setShowDetail={setShowDetail}
+                  showDetail={showDetail.show}
                 />
               );
             })
@@ -189,6 +269,32 @@ export default function HomePage({
             />
           </>
         )}
+
+        {showDetail.show && (
+          <>
+            <div
+              className={`overlay`}
+              onClick={() => {
+                setShowDetail({ show: false, id: null });
+              }}
+            ></div>
+            <PokemonDetail
+              setShowDetail={setShowDetail}
+              pokemonInfo={pokemonInfo}
+            />
+          </>
+        )}
+
+        <Pagination
+          count={totalPages}
+          page={currentPage}
+          onChange={handlePageChange}
+          variant="outlined"
+          shape="rounded"
+          color="standard"
+          size="large"
+          className={styles.pagination}
+        />
       </main>
     </div>
   );

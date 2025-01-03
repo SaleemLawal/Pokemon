@@ -1,0 +1,9 @@
+@use "../../styles/variables" as *;
+
+.about {
+  padding: 2rem;
+  display: grid;
+  grid-template-columns: 0.25fr 1fr;
+  width: 50%;
+  gap: 1rem 0;
+}

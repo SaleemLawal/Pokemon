@@ -1,0 +1,14 @@
+@use "../../styles/variables" as *;
+
+.base--stats {
+  padding: 2rem;
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+
+  & div {
+    display: grid;
+    grid-template-columns: 0.25fr 0.1fr 1fr;
+    align-items: center;
+  }
+}

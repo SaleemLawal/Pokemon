@@ -16,130 +16,146 @@
 
 .grass {
   background-color: $color-grass-tag;
+
+  .MuiLinearProgress-bar {
+    background-color: $color-grass-tag !important;
+  }
 }
 
 .fire {
   background-color: $color-fire-tag;
+
+  .MuiLinearProgress-bar {
+    background-color: $color-fire-tag !important;
+  }
 }
 
 .bug {
   background-color: $color-bug-tag;
+
+  .MuiLinearProgress-bar {
+    background-color: $color-bug-tag !important;
+  }
 }
 
 .water {
   background-color: $color-water-tag;
+
+  .MuiLinearProgress-bar {
+    background-color: $color-water-tag !important;
+  }
 }
 
 .flying {
   background-color: $color-flying-tag;
+
+  .MuiLinearProgress-bar {
+    background-color: $color-flying-tag !important;
+  }
 }
 
 .poison {
   background-color: $color-poison-tag;
+
+  .MuiLinearProgress-bar {
+    background-color: $color-poison-tag !important;
+  }
 }
 
 .normal {
   background-color: $color-normal-tag;
+
+  .MuiLinearProgress-bar {
+    background-color: $color-normal-tag !important;
+  }
 }
 
 .rock {
   background-color: $color-rock-tag;
+
+  .MuiLinearProgress-bar {
+    background-color: $color-rock-tag !important;
+  }
 }
 
 .ground {
   background-color: $color-ground-tag;
+
+  .MuiLinearProgress-bar {
+    background-color: $color-ground-tag !important;
+  }
 }
 
 .fighting {
   background-color: $color-fighting-tag;
+
+  .MuiLinearProgress-bar {
+    background-color: $color-fighting-tag !important;
+  }
 }
 
 .ghost {
   background-color: $color-ghost-tag;
+
+  .MuiLinearProgress-bar {
+    background-color: $color-ghost-tag !important;
+  }
 }
 
 .psychic {
   background-color: $color-psychic-tag;
+
+  .MuiLinearProgress-bar {
+    background-color: $color-psychic-tag !important;
+  }
+}
+
+.ice {
+  background-color: $color-ice-tag;
+
+  .MuiLinearProgress-bar {
+    background-color: $color-ice-tag !important;
+  }
 }
 
 .dragon {
   background-color: $color-dragon-tag;
+
+  .MuiLinearProgress-bar {
+    background-color: $color-dragon-tag !important;
+  }
+}
+
+.dark {
+  background-color: $color-dark-tag;
+
+  .MuiLinearProgress-bar {
+    background-color: $color-dark-tag !important;
+  }
 }
 
 .fairy {
   background-color: $color-fairy-tag;
+
+  .MuiLinearProgress-bar {
+    background-color: $color-fairy-tag !important;
+  }
 }
 
 .electric {
   background-color: $color-electric-tag;
+
+  .MuiLinearProgress-bar {
+    background-color: $color-electric-tag !important;
+  }
 }
 
 .steel {
   background-color: $color-steel-tag;
-}
 
-.grass {
-  background-color: $color-grass-tag;
-}
-
-.fire {
-  background-color: $color-fire-tag;
-}
-
-.bug {
-  background-color: $color-bug-tag;
-}
-
-.water {
-  background-color: $color-water-tag;
-}
-
-.flying {
-  background-color: $color-flying-tag;
-}
-
-.poison {
-  background-color: $color-poison-tag;
-}
-
-.normal {
-  background-color: $color-normal-tag;
-}
-
-.rock {
-  background-color: $color-rock-tag;
-}
-
-.ground {
-  background-color: $color-ground-tag;
-}
-
-.fighting {
-  background-color: $color-fighting-tag;
-}
-
-.ghost {
-  background-color: $color-ghost-tag;
-}
-
-.psychic {
-  background-color: $color-psychic-tag;
-}
-
-.dragon {
-  background-color: $color-dragon-tag;
-}
-
-.fairy {
-  background-color: $color-fairy-tag;
-}
-
-.electric {
-  background-color: $color-electric-tag;
-}
-
-.steel {
-  background-color: $color-steel-tag;
+  .MuiLinearProgress-bar {
+    background-color: $color-steel-tag !important;
+  }
 }
 
 // background
@@ -192,12 +208,20 @@
   background-color: $color-psychic-background;
 }
 
+.ice--background {
+  background-color: $color-ice-background;
+}
+
 .dragon--background {
   background-color: $color-dragon-background;
 }
 
 .fairy--background {
   background-color: $color-fairy-background;
+}
+
+.dark--background {
+  background-color: $color-dark-background;
 }
 
 .electric--background {
