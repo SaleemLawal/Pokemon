@@ -9,7 +9,7 @@
     "lint": "eslint .",
     "preview": "vite preview",
     "compile": "sass src/styles/main.scss src/styles/style.comp.css",
-    "concat": "concat -o src/styles/style.concat.css src/styles/icon-font.css src/styles/style.comp.css",
+    "concat": "concat -o src/styles/style.concat.css src/styles/style.comp.css",
     "prefix": "postcss --use autoprefixer -b 'last 10 versions' src/styles/style.concat.css -o src/styles/style.prefix.css",
     "compress": "sass src/styles/style.prefix.css src/styles/style.css --style=compressed",
     "build:css": "npm-run-all compile concat prefix compress"
