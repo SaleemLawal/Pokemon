@@ -1,0 +1,37 @@
+@use "../../styles/variables" as *;
+
+.pokemon--info {
+  background-color: white;
+  border-radius: 0.7rem 0.7rem 0 0;
+  height: 25rem;
+  font-weight: 500;
+
+  &__list {
+    padding: 1rem;
+    padding-bottom: 0.5rem;
+    display: flex;
+    gap: 2rem;
+    color: $color-grey-dark-60;
+    border-bottom: 1px solid $color-grey-dark-24;
+  }
+
+  .pokemon--info__item {
+    cursor: pointer;
+    position: relative;
+
+    &.active {
+      font-weight: bold;
+      color: #000;
+
+      &::after {
+        content: "";
+        background-color: $color-dark-blue;
+        width: 100%;
+        height: 0.3rem;
+        position: absolute;
+        bottom: -0.7rem;
+        left: 0;
+      }
+    }
+  }
+}

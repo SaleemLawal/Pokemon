@@ -12,10 +12,14 @@ type PokemonProps = {
   name: string;
   url?: string;
   searchTerm?: string;
-  id?: number;
+  id: number;
   types?: PokemonType[];
   img?: string;
   image?: string;
+  setShowDetail: React.Dispatch<
+    React.SetStateAction<{ show: boolean; id: number | null }>
+  >;
+  showDetail?: boolean;
 };
 
 type PokemonDetail = {

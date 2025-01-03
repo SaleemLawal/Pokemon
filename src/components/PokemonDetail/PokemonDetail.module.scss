@@ -1,0 +1,12 @@
+.pokemon--detail {
+    
+  position: absolute;
+  top: 5rem;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 20;
+//   width: 30rem;
+//   height: 30rem;
+  border-radius: 0.7rem;
+  overflow: hidden;
+}

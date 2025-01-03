@@ -9,6 +9,7 @@ import { sortPokemon } from "../../utils/helpers";
 import Filter from "../../components/Filter/Filter";
 import axios from "axios";
 import { POKEMON_TYPES } from "../../utils/constants";
+import PokemonDetail from "@/components/PokemonDetail/PokemonDetail";
 
 export default function HomePage({
   showFilter,
@@ -28,6 +29,14 @@ export default function HomePage({
       return acc;
     }, {} as checkMark)
   );
+  const [showDetail, setShowDetail] = useState<{
+    show: boolean;
+    id: number | null;
+  }>({
+    show: false,
+    id: null,
+  });
+  console.log(showDetail);
 
   const handleSortChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
     setSortOrder(e.target.value);
@@ -90,6 +99,12 @@ export default function HomePage({
     const sortedData = sortPokemon(data, sortOrder);
     setData(sortedData);
   }, [sortOrder]);
+
+  // useEffect(() => {
+  //   if (showDetail.id) {
+      
+  //   }
+  // }, [showDetail.id]);
 
   // Homepage.tsx
   // Pass this to Filter, use it as an action when apply is clicked
@@ -169,6 +184,8 @@ export default function HomePage({
                   types={pokemon.types}
                   image={pokemon.img}
                   searchTerm={searchTerm}
+                  setShowDetail={setShowDetail}
+                  showDetail={showDetail.show}
                 />
               );
             })
@@ -187,6 +204,18 @@ export default function HomePage({
               checkedStates={checkedStates}
               setCheckedStates={setCheckedStates}
             />
+          </>
+        )}
+
+        {showDetail.show && (
+          <>
+            <div
+              className={`overlay`}
+              onClick={() => {
+                setShowDetail({ show: false, id: null });
+              }}
+            ></div>
+            <PokemonDetail />
           </>
         )}
       </main>
